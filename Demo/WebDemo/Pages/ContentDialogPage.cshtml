@@ -1,0 +1,384 @@
+﻿@page "/contentdialog"
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <h3>ContentDialog</h3>
+                        <p>
+                            Be sure to add aria-labelledby="...", referencing the dialog title.
+                            <br />
+                            Additionally, you may give a description of your modal dialog with aria-describedby on ContentDialog.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>API</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                <strong>Parameter/Property</strong>
+                                            </td>
+                                            <td>
+                                                <strong>Value</strong>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in _listProps)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.Item1
+                                                </td>
+                                                <td>
+                                                    @item.Item2
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                Methods
+                                            </td>
+                                            <td>
+                                                Description
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in _listMethods)
+                                        {
+                                            <tr>
+                                                <td>@item.Item1</td>
+                                                <td>@item.Item2</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <ul style="list-style-type: none;">
+                            <li>
+                                <button style="margin-top: 20px;" class="btn btn-primary" onclick="@ShowContentDialog">
+                                    Show ContentDialog
+                                </button>
+                            </li>
+                            <li>
+                                <button style="margin-top: 20px;" class="btn btn-primary" onclick="@ShowAwaitContentDialog">
+                                    Show ContentDialog await for close and change msg. Msg = @msg
+                                </button>
+                            </li>
+                            <li>
+                                <button style="margin-top: 20px;" class="btn btn-primary" onclick="@ShowCustomDlg">
+                                    Show custom ContentDialog
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <Tab>
+                            <TabItem Header="Code">
+                                <pre>
+&lt;button style=&quot;margin-top: 20px;&quot; class=&quot;btn btn-primary&quot; onclick=&quot;@@ShowContentDialog&quot;&gt;
+    Show ContentDialog
+&lt;/button&gt;
+
+&lt;ContentDialog ref=&quot;contentDlg&quot; aria-labelledby=&quot;<strong>myDialogIdToHeader</strong>&quot;&gt;
+    &lt;div style=&quot;text-align: center;&quot;&gt;
+        &lt;p id=&quot;<strong>myDialogIdToHeader</strong>&quot;&gt;Hallo World&lt;/p&gt;
+        &lt;button class=&quot;btn btn-primary&quot; onclick=&quot;@@CloseContentDialog&quot;&gt;
+            Close
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/ContentDialog&gt;
+
+@@functions {
+    string msg = "";
+    TWyTec.Blazor.ContentDialog contentDlg;
+
+    void ShowContentDialog()
+    {
+        contentDlg.Show();
+    }
+
+    async void ShowAwaitContentDialog()
+    {
+        msg = "Dlg is open";
+
+        await contentDlg.ShowAsync();
+
+        msg = "Dlg is close";
+        this.StateHasChanged();
+    }
+
+    void CloseContentDialog()
+    {
+        contentDlg.Hide();
+    }
+}
+                        </pre>
+                            </TabItem>
+                            <TabItem Header="Code custom">
+                                <pre>
+&lt;style&gt;
+    .customContentDlgWrapper {
+        background-color: rgba(255,255,255,0.5);
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: fixed;
+        right: 0px;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        transition: opacity 0.5s, z-index 0.5s, transform 0.5s;
+        
+    }
+
+    .customContentDlgContent {
+        border-radius: 5px;
+        border: 1px solid dodgerblue;
+        max-width: 600px;
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+        background-color: whitesmoke;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 30px 10px 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        position: relative;
+    }
+&lt;/style&gt;
+
+&lt;button style=&quot;margin-top: 20px;&quot; class=&quot;btn btn-primary&quot; onclick=&quot;@@ShowCustomDlg&quot;&gt;
+    Show custom ContentDialog
+&lt;/button&gt;
+
+&lt;ContentDialog ref=&quot;customDlg&quot; 
+    ContentClass=&quot;customContentDlgContent&quot; 
+    WrapperClass=&quot;customContentDlgWrapper&quot;
+    FadeInStyle=&quot;@@customFadeIn&quot;
+    FadeOutStyle=&quot;@@customFadeOut&quot;
+    aria-labelledby=&quot;mycustomDialogIdToHeader&quot;&gt;
+    &lt;div style=&quot;text-align: center;&quot;&gt;
+        &lt;p id=&quot;mycustomDialogIdToHeader&quot;&gt;Hello World&lt;/p&gt;
+        &lt;p&gt;
+            Text
+        &lt;/p&gt;
+        &lt;button class=&quot;btn btn-primary&quot; onclick=&quot;@@CloseCustomDlg&quot;&gt;
+            Close
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/ContentDialog&gt;
+
+@@functions {
+    TWyTec.Blazor.ContentDialog customDlg;
+    string customFadeIn = "opacity: 1; z-index: 1050; transform: scale(1,1);";
+    string customFadeOut = "opacity: 0; z-index: -1; transform: scale(0,0);";
+
+    void ShowCustomDlg()
+    {
+        customDlg.Show();
+    }
+
+    void CloseCustomDlg()
+    {
+        customDlg.Hide();
+    }
+}
+                        </pre>
+                            </TabItem>
+                        </Tab>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>Default CSS Classes</h3>
+
+                        <pre>
+.TWyTecContentDlgWrapper {
+    background-color: rgba(0,0,0,0.5);
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    transition: opacity 0.3s, z-index 0.3s, top 0.3s;
+}
+
+.TWyTecContentDlgContent {
+    border-radius: 5px;
+    border: 1px solid dodgerblue;
+    max-width: 600px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 30px 10px 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    position: relative;
+}
+                                    </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ContentDialog ref="contentDlg" aria-labelledby="myDialogIdToHeader">
+    <div style="text-align: center;">
+        <p id="myDialogIdToHeader">Hello World</p>
+        <p>
+            @Text
+        </p>
+        <button class="btn btn-primary" onclick="@CloseContentDialog">
+            Close
+        </button>
+    </div>
+</ContentDialog>
+
+<style>
+    .customContentDlgWrapper {
+        background-color: rgba(255,255,255,0.5);
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: fixed;
+        right: 0px;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        transition: opacity 0.5s, z-index 0.5s, transform 0.5s;
+        
+    }
+
+    .customContentDlgContent {
+        border-radius: 5px;
+        border: 1px solid dodgerblue;
+        max-width: 600px;
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+        background-color: whitesmoke;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 30px 10px 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        position: relative;
+    }
+</style>
+
+<ContentDialog ref="customDlg" 
+    ContentClass="customContentDlgContent" 
+    WrapperClass="customContentDlgWrapper"
+    FadeInStyle="@customFadeIn"
+    FadeOutStyle="@customFadeOut"
+    aria-labelledby="mycustomDialogIdToHeader">
+    <div style="text-align: center;">
+        <p id="mycustomDialogIdToHeader">Hello World</p>
+        <p>
+            @Text
+        </p>
+        <button class="btn btn-primary" onclick="@CloseCustomDlg">
+            Close
+        </button>
+    </div>
+</ContentDialog>
+
+@functions{
+
+    List<Tuple<string, string>> _listProps = new List<Tuple<string, string>>() {
+        new Tuple<string, string>("WrapperClass", "CSS Class"),
+        new Tuple<string, string>("ContentClass", "CSS Class"),
+        new Tuple<string, string>("FadeInStyle", "CSS Class"),
+        new Tuple<string, string>("FadeOutStyle", "CSS Class")
+    };
+
+    List<Tuple<string, string>> _listMethods = new List<Tuple<string, string>>() {
+        new Tuple<string, string>("void Show()", "Show ContentDialog"),
+        new Tuple<string, string>("async Task ShowAsync()", "Show ContentDialog and wait for hide"),
+        new Tuple<string, string>("void Hide()", "Hide ContentDialog")
+    };
+
+    string Text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut ";
+
+    string msg = "";
+    TWyTec.Blazor.ContentDialog contentDlg;
+
+
+    void ShowContentDialog()
+    {
+        contentDlg.Show();
+    }
+
+    async void ShowAwaitContentDialog()
+    {
+        msg = "Dlg is open";
+
+        await contentDlg.ShowAsync();
+
+        msg = "Dlg is close";
+        this.StateHasChanged();
+    }
+
+    void CloseContentDialog()
+    {
+        contentDlg.Hide();
+    }
+
+    TWyTec.Blazor.ContentDialog customDlg;
+    string customFadeIn = "opacity: 1; z-index: 1050; transform: scale(1,1);";
+    string customFadeOut = "opacity: 0; z-index: -1; transform: scale(0,0);";
+
+    void ShowCustomDlg()
+    {
+        customDlg.Show();
+    }
+
+    void CloseCustomDlg()
+    {
+        customDlg.Hide();
+    }
+}

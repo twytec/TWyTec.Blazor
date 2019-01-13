@@ -1,0 +1,58 @@
+﻿@page "/"
+
+<div>
+    <ul style="list-style-type: none;">
+        <li>
+            <button style="margin-top: 20px;" class="btn btn-primary" onclick="@ShowContentDialog">
+                Show ContentDialog
+            </button>
+        </li>
+        <li>
+            <button style="margin-top: 20px;" class="btn btn-primary" onclick="@ShowAwaitContentDialog">
+                Show ContentDialog await for close and change msg
+            </button>
+        </li>
+    </ul>
+
+    <p style="color: gainsboro;">
+        msg: @msg
+    </p>
+</div>
+
+
+
+<ContentDialog ref="contentDlg" aria-labelledby="myTestedModal">
+    <div style="text-align: center;">
+        <p id="myTestedModal">Hallo World</p>
+        <button class="btn btn-primary" onclick="@CloseContentDialog">
+            Close
+        </button>
+    </div>
+</ContentDialog>
+
+@functions{
+
+    string msg = "";
+    private TWyTec.Blazor.ContentDialog contentDlg { get; set; }
+
+    void ShowContentDialog()
+    {
+        contentDlg.Show();
+    }
+
+    async void ShowAwaitContentDialog()
+    {
+        msg = "Dlg is open";
+
+        await contentDlg.ShowAsync();
+
+        msg = "Dlg is close";
+        this.StateHasChanged();
+    }
+
+    void CloseContentDialog()
+    {
+        contentDlg.Hide();
+    }
+
+}

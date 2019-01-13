@@ -1,0 +1,78 @@
+﻿@page "/"
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Welcom to TWyTec Blazor Components pre-alpha</h1>
+
+                <p>
+                    <a href="https://blazor.net/index.html">Blazor</a> is a single-page web app framework built on .NET that runs in the browser with WebAssembly.
+                    <br />
+                    TWyTec.Blazor Licens <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>
+                </p>
+                <br />
+                <br />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            Documentation
+                        </td>
+                        <td>
+                            Nuget
+                        </td>
+                        <td>
+                            GitHub
+                        </td>
+                        <td>
+                            ViewImports
+                        </td>
+                    </tr>
+                    @foreach (var item in _list)
+                    {
+                        <tr>
+                            <td>
+                                @item.Item1
+                            </td>
+                            <td>
+                                <a href="/@item.Item2">Link</a>
+                            </td>
+                            <td>
+                                PM> Install-Package @item.Item3
+                                <br />
+                                <a href="https://www.nuget.org/packages/@item.Item3">Nuget link</a>
+                            </td>
+                            <td>
+                                <a href="https://github.com/twytec/">Github</a>
+                            </td>
+                            <td>
+                                @@using TWyTec.Blazor
+                                <br />
+                                @@addTagHelper *, @item.Item3
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+
+    //Name, Link to Page, Namespace
+    List<Tuple<string, string, string>> _list = new List<Tuple<string, string, string>>() {
+        new Tuple<string, string, string>("Accordion", "accordion", "TWyTec.Blazor.Accordion"),
+        new Tuple<string, string, string>("ContentDialog", "contentdialog", "TWyTec.Blazor.ContentDialog"),
+        new Tuple<string, string, string>("Tab", "tab", "TWyTec.Blazor.Tab"),
+    };
+
+}

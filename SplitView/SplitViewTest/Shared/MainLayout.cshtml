@@ -1,0 +1,116 @@
+@inherits BlazorLayoutComponent
+
+<style>
+    .myNav {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+    }
+
+    .navBtn {
+        background-color: transparent;
+        border: 0px none transparent;
+        margin: 0px;
+        padding: 0px;
+        text-decoration: none;
+        color: white;
+        height: 30px;
+    }
+
+        .navBtn:focus {
+            outline: none;
+        }
+
+    .navGrid {
+        display: grid;
+        grid-template-columns: 40px 210px;
+        position: relative;
+    }
+
+    .navIcon {
+        font-size: 20px;
+        grid-column: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navText {
+        grid-column: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div>
+    <button onclick="@BtnNavToggle">Test</button>
+    <SplitView>
+        <SplitViewPane ref="myPane" PaneMode="SplitViewPaneMode.CompactInline" IsPaneOpen="false">
+            <div>
+
+                <ul class="myNav">
+                    <li>
+                        <button onclick="@BtnNavToggle" class="navBtn">
+                            <div class="navGrid">
+                                <div class="navIcon">
+                                    <Icon>&#xE700</Icon>
+                                </div>
+                                <div class="navText">
+                                    Open and close Menu
+                                </div>
+                            </div>
+                        </button>
+                    </li>
+                    <li style="display: block; width: 250px; overflow-x: hidden;">
+                        <a href="/" class="navBtn">
+                            <div class="navGrid">
+                                <div class="navIcon">
+                                    <Icon>&#xE80F</Icon>
+                                </div>
+                                <div class="navText">
+                                    Home
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li style="display: block; width: 250px; overflow-x: hidden;">
+                        <a href="/page2" class="navBtn">
+                            <div class="navGrid">
+                                <div class="navIcon">
+                                    <Icon>&#xE99A</Icon>
+                                </div>
+                                <div class="navText">
+                                    Page 2
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+
+
+
+            </div>
+        </SplitViewPane>
+        <SplitViewContent>
+            <div>
+                @Body
+            </div>
+        </SplitViewContent>
+    </SplitView>
+</div>
+
+
+
+
+@functions {
+    
+    TWyTec.Blazor.SplitViewPane myPane;
+    
+    void BtnNavToggle()
+    {
+        
+        myPane.TogglePane();
+    }
+}

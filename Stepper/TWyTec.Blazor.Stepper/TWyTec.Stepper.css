@@ -1,0 +1,102 @@
+﻿
+.TWyTecHorizontalStepper {
+    width: 100%;
+    height: auto;
+}
+
+.TWyTecHorizontalStepperContent {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 15px 10px 15px;
+}
+
+.TWyTecHorizontalStepperContentItem {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    transition: transform 0.3s;
+}
+
+.TWyTecHorizontalStepperContentItemActive {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    opacity: 1;
+    width: 100%;
+}
+
+.TWyTecHorizontalStepperNav {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    
+}
+
+.TWyTecHorizontalStepperNavButton {
+    color: gray;
+    cursor: pointer;
+    width: auto;
+    margin: 0px;
+    padding: 10px;
+}
+
+    .TWyTecHorizontalStepperNavButton:hover {
+        color: dodgerblue !important;
+    }
+
+.TWyTecHorizontalStepperBtnActive {
+    color: dodgerblue !important;
+}
+
+.TWyTecHorizontalStepperLine {
+    flex: auto;
+    border-top: 1px solid gainsboro;
+    min-width: 32px;
+}
+
+/*
+    Vertical
+*/
+.TWyTecVerticalStepper {
+    width: 100%;
+    height: auto;
+}
+
+.TWyTecVerticalStepperItem {
+    margin-left: 30px;
+    border-left: 1px solid gainsboro;
+    padding-left: 10px;
+}
+
+.TWyTecVerticalStepperItemContent {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+.TWyTecVerticalStepperContentTranslation {
+    transition: max-height 0.3s;
+}
+
+.TWyTecVerticalStepperItemButton {
+    cursor: pointer;
+    height: 40px;
+    width: 100%;
+    color: gray;
+}
+
+    .TWyTecVerticalStepperItemButton:hover {
+        color: dodgerblue !important;
+    }
+
+.TWyTecVerticalStepperItemButtonActive {
+    color: dodgerblue !important;
+}

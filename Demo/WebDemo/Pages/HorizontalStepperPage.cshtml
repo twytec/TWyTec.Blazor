@@ -1,0 +1,326 @@
+﻿
+@page "/horizontalstepper"
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <h3>HorizontalStepper</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>API</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                <strong>Parameter/Property</strong>
+                                            </td>
+                                            <td>
+                                                <strong>Value</strong>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in _listProps)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.Item1
+                                                </td>
+                                                <td>
+                                                    @item.Item2
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                Methods
+                                            </td>
+                                            <td>
+                                                Description
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in _listMethods)
+                                        {
+                                            <tr>
+                                                <td>@item.Item1</td>
+                                                <td>@item.Item2</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <Tab>
+                            <TabItem Header="Stepper">
+                                <HorizontalStepper ref="stepper">
+                                    <StepperItem Header="1 Name and Email">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" class="form-control" placeholder="Name">
+                                        </div>
+                                        <button onclick="@(() => stepper.GoToNext())" class="btn btn-default">
+                                            Next
+                                        </button>
+                                    </StepperItem>
+                                    <StepperItem Header="2 Adress">
+                                        <div class="form-group">
+                                            <label>Adress</label>
+                                            <textarea class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <button onclick="@(() => stepper.GoToNext())" class="btn btn-default">
+                                            Next
+                                        </button>
+                                    </StepperItem>
+                                    <StepperItem Header="3 Done">
+                                        <div class="text-center" style="margin: 50px;">
+                                            <span style="font-size: 40px; color: dodgerblue;" class="oi oi-check text-center"></span>
+                                        </div>
+                                    </StepperItem>
+                                </HorizontalStepper>
+                            </TabItem>
+                            <TabItem Header="Stepper linear mode">
+                                <HorizontalStepper ref="stepper2" StepperNavButtonDisabled="true">
+                                    <StepperItem Header="1 Name and Email">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" class="form-control" placeholder="Name">
+                                        </div>
+                                        <button onclick="@(() => stepper2.GoToNext())" class="btn btn-default">
+                                            Next
+                                        </button>
+                                    </StepperItem>
+                                    <StepperItem Header="2 Adress">
+                                        <div class="form-group">
+                                            <label>Adress</label>
+                                            <textarea class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <button onclick="@(() => stepper2.GoToNext())" class="btn btn-default">
+                                            Next
+                                        </button>
+                                    </StepperItem>
+                                    <StepperItem Header="3 Done">
+                                        <div class="text-center" style="margin: 50px;">
+                                            <span style="font-size: 40px; color: dodgerblue;" class="oi oi-check text-center"></span>
+                                        </div>
+                                    </StepperItem>
+                                </HorizontalStepper>
+                            </TabItem>
+                        </Tab>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <Tab>
+                            <TabItem Header="Code Tab">
+                                <pre>
+&lt;Tab&gt;
+    &lt;TabItem Header=&quot;Tab 1&quot;&gt;
+        Text
+    &lt;/TabItem&gt;
+    &lt;TabItem Header=&quot;Tab 2&quot;&gt;
+        Text
+    &lt;/TabItem&gt;
+    &lt;TabItem Header=&quot;Tab 3&quot;&gt;
+        Text
+    &lt;/TabItem&gt;
+&lt;/Tab&gt;
+</pre>
+                            </TabItem>
+                            <TabItem Header="Code Tab nav bottom">
+                                <pre>
+&lt;Tab TabNavPosition=&quot;TabNavPosition.Bottom&quot;&gt;
+    &lt;TabItem Header=&quot;Tab 1&quot;&gt;
+        Text
+    &lt;/TabItem&gt;
+    &lt;TabItem Header=&quot;Tab 2&quot;&gt;
+        Text
+    &lt;/TabItem&gt;
+    &lt;TabItem Header=&quot;Tab 3&quot;&gt;
+        Text
+    &lt;/TabItem&gt;
+&lt;/Tab&gt;
+</pre>
+                            </TabItem>
+                            <TabItem Header="Code Tab change index">
+                                <pre>
+&lt;div class=&quot;text-center&quot;&gt;
+    &lt;div class=&quot;btn-group&quot;&gt;
+        &lt;button onclick=&quot;@@(() =&gt; tab.ChangeSelectedIndex(0))&quot; type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;0&lt;/button&gt;
+        &lt;button onclick=&quot;@@(() =&gt; tab.ChangeSelectedIndex(1))&quot; type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;1&lt;/button&gt;
+        &lt;button onclick=&quot;@@(() =&gt; tab.ChangeSelectedIndex(2))&quot; type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;2&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;br /&gt;
+&lt;/div&gt;
+&lt;Tab ref=&quot;tab&quot;&gt;
+    &lt;TabItem Header=&quot;Tab 1&quot;&gt;
+        Tab 1
+    &lt;/TabItem&gt;
+    &lt;TabItem Header=&quot;Tab 2&quot;&gt;
+        Tab 2
+    &lt;/TabItem&gt;
+    &lt;TabItem Header=&quot;Tab 3&quot;&gt;
+        Tab 3
+    &lt;/TabItem&gt;
+&lt;/Tab&gt;
+</pre>
+                            </TabItem>
+                        </Tab>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>Default CSS Classes</h4>
+                        <pre>
+.TWyTecTab {
+    width: 100%;
+    height: auto;
+}
+
+.TWyTecTabContent {
+    position: relative;
+    overflow: hidden;
+}
+
+/*Tab Top*/
+.TWyTecTabNav {
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.TWyTecTabNavBtn {
+    background-color: transparent;
+    border: 0px none transparent;
+    cursor: pointer;
+    height: 100%;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+    .TWyTecTabNavBtn:hover {
+        border-bottom: 2px solid dodgerblue !important;
+        color: dodgerblue !important;
+    }
+
+    .TWyTecTabNavBtn:focus {
+        outline: 0;
+    }
+
+.TWyTecTabNavBtnActive {
+    border-bottom: 2px solid dodgerblue !important;
+    color: dodgerblue !important;
+}
+
+/*Tab Bottom*/
+.TWyTecTabNavBottom {
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid gainsboro;
+}
+
+.TWyTecTabNavBottomBtn {
+    background-color: transparent;
+    border: 0px none transparent;
+    cursor: pointer;
+    height: 100%;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+    .TWyTecTabNavBottomBtn:hover {
+        border-top: 2px solid dodgerblue !important;
+        color: dodgerblue !important;
+    }
+
+    .TWyTecTabNavBottomBtn:focus {
+        outline: 0;
+    }
+
+.TWyTecTabNavBottomBtnActive {
+    border-top: 2px solid dodgerblue !important;
+    color: dodgerblue !important;
+}
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@functions{
+
+    List<Tuple<string, string>> _listProps = new List<Tuple<string, string>>() {
+    new Tuple<string, string>("StepperClass", "CSS Class"),
+    new Tuple<string, string>("StepperNavClass", "CSS Class"),
+    new Tuple<string, string>("StepperNavButtonClass", "CSS Class"),
+    new Tuple<string, string>("StepperNavButtonDisabled", "bool. Default is false"),
+    new Tuple<string, string>("StepperNavButtonActiveClass", "CSS Class"),
+    new Tuple<string, string>("StepperContentClass", "CSS Class"),
+    new Tuple<string, string>("SelectedIndex", "int"),
+};
+
+    List<Tuple<string, string>> _listMethods = new List<Tuple<string, string>>() {
+    new Tuple<string, string>("void ChangeSelectedIndex(int index)", "change index and reload tab"),
+    new Tuple<string, string>("int GetSelectedIndex()", "Get current index"),
+    new Tuple<string, string>("void GoToNext()", "Goto next step"),
+    new Tuple<string, string>("void GoToLast()", "Goto last step"),
+};
+
+    string Text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut ";
+
+    TWyTec.Blazor.HorizontalStepper stepper;
+    TWyTec.Blazor.HorizontalStepper stepper2;
+}

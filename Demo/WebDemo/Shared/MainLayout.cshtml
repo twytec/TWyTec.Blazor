@@ -1,0 +1,131 @@
+@inherits BlazorLayoutComponent
+
+<style>
+    .myNav {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+    }
+    .myNav li {
+        margin: 10px 0px 0px 0px;
+    }
+
+    .navBtn {
+        background-color: transparent;
+        border: 0px none transparent;
+        margin: 0px;
+        padding: 0px;
+        text-decoration: none;
+        color: gainsboro;
+        height: 30px;
+    }
+
+        .navBtn:focus {
+            outline: none;
+        }
+
+        .navBtn:hover {
+            text-decoration: none;
+            color: dodgerblue;
+        }
+
+    .navGrid {
+        display: grid;
+        grid-template-columns: 40px 210px;
+        position: relative;
+    }
+
+    .navIcon {
+        font-size: 16px;
+        grid-column: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navText {
+        grid-column: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .splitView {
+        display: grid;
+        grid-template-columns: 40px auto;
+        background-color: #2f2f2f;
+    }
+
+    pre {
+        background-color: #2f2f2f;
+        color: gainsboro;
+    }
+</style>
+
+<div>
+    <SplitView SplitViewClass="splitView">
+        <SplitViewPane ref="myPane" PaneMode="SplitViewPaneMode.CompactOverlay" IsPaneOpen="false" style="background-color: #2f2f2f; z-index: 50;">
+            <div>
+                <ul class="myNav">
+                    <li>
+                        <button onclick="@BtnNavToggle" class="navBtn">
+                            <div class="navGrid">
+                                <div class="navIcon" aria-hidden="true">
+                                    <span class="oi oi-menu"></span>
+                                </div>
+                                <div class="navText">
+                                    Open and close Menu
+                                </div>
+                            </div>
+                        </button>
+                    </li>
+                    @foreach (var item in _list)
+                    {
+                        <li style="display: block; width: 250px; overflow-x: hidden;">
+                            <a href="@item.Item1" class="navBtn">
+                                <div class="navGrid">
+                                    <div class="navIcon" aria-hidden="true">
+                                        <span class="oi @item.Item2"></span>
+                                    </div>
+                                    <div class="navText">
+                                        @item.Item3
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <button aria-hidden="true" style="position: fixed; bottom: 0px; left: 0px; background-color: dodgerblue; margin: 5px; padding: 5px; border: 0px none transparent; width: 30px;" onclick="toTop()">
+                    <span style="color: white; font-size: 16px;" class="oi oi-arrow-thick-top"></span>
+                </button>
+            </div>
+        </SplitViewPane>
+        <SplitViewContent>
+            <div>
+                @Body
+            </div>
+        </SplitViewContent>
+    </SplitView>
+</div>
+
+
+
+@functions {
+
+    TWyTec.Blazor.SplitViewPane myPane;
+
+    List<Tuple<string, string, string>> _list = new List<Tuple<string, string, string>>() {
+        new Tuple<string, string, string>("/", "oi-home", "Home"),
+        new Tuple<string, string, string>("/accordion", "oi-project", "Accordion"),
+        new Tuple<string, string, string>("/contentdialog", "oi-comment-square", "ContentDialog"),
+        new Tuple<string, string, string>("/tab", "oi-folder", "Tab"),
+        new Tuple<string, string, string>("/horizontalstepper", "oi-ellipses", "HorizontalStepper"),
+        new Tuple<string, string, string>("/tab", "oi-list", "VerticalStepper"),
+    };
+
+    void BtnNavToggle()
+    {
+        myPane.TogglePane();
+    }
+}
