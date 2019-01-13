@@ -1,6 +1,6 @@
 # TWyTec.Blazor
 
-## [Accordion](https://www.google.com)
+## [Accordion](https://github.com/twytec/TWyTec.Blazor/tree/master/Accordion)
 ViewImports @using TWyTec.Blazor @addTagHelper *, TWyTec.Blazor.Accordion
 
 ```c#
