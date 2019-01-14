@@ -8,7 +8,7 @@ Experimental components for Blazor
 
 [ContentDialog](https://github.com/twytec/TWyTec.Blazor/wiki/ContentDialog)
 
-[HorizontalStepper](https://github.com/twytec/TWyTec.Blazor/wiki/ContentDialog)
+[HorizontalStepper](https://github.com/twytec/TWyTec.Blazor/wiki/HorizontalStepper)
 
 [VerticalStepper](https://github.com/twytec/TWyTec.Blazor/wiki/ContentDialog)
 
