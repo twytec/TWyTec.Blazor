@@ -135,7 +135,22 @@ namespace TWyTec.Blazor
         }
 
         void IHandleEvent.HandleEvent(EventHandlerInvoker binding, UIEventArgs args)
-            => Based.IHandleEvent.HandleEvent(binding, args, StateHasChanged);
+        {
+            var task = binding.Invoke(args);
+
+            if (task.Status == TaskStatus.RanToCompletion)
+            {
+                StateHasChanged();
+                return;
+            }
+
+            task.ContinueWith(t => {
+                if (t.Exception != null)
+                    HandleException(t.Exception);
+                else
+                    StateHasChanged();
+            });
+        }
 
         #region Tree
 
@@ -318,6 +333,19 @@ namespace TWyTec.Blazor
             var item = _accTrees[_selectedIndex];
             await JSRuntime.Current.InvokeAsync<bool>("twytecAccordionSetPanelHeight", item.Id);
         }
+
+        #region Helper
+
+        public static void HandleException(Exception ex)
+        {
+            if (ex is AggregateException && ex.InnerException != null)
+            {
+                ex = ex.InnerException; // It's more useful
+            }
+            Console.Error.WriteLine($"[{ex.GetType().FullName}] {ex.Message}\n{ex.StackTrace}");
+        }
+
+        #endregion
     }
 
     internal class AccordionTree
