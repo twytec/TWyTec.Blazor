@@ -14,7 +14,7 @@
 </Accordion>
 ```
 
-## [ContentDialog](https://github.com/twytec/TWyTec.Blazor/tree/master/contentdialog)
+## [ContentDialog](https://github.com/twytec/TWyTec.Blazor/tree/master/ContentDialog)
 
 @using TWyTec.Blazor
 
