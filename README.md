@@ -10,7 +10,7 @@ Experimental components for Blazor
 
 [HorizontalStepper](https://github.com/twytec/TWyTec.Blazor/wiki/HorizontalStepper)
 
-[VerticalStepper](https://github.com/twytec/TWyTec.Blazor/wiki/ContentDialog)
+[VerticalStepper](https://github.com/twytec/TWyTec.Blazor/wiki/VerticalStepper)
 
 [SplitView](https://github.com/twytec/TWyTec.Blazor/wiki/ContentDialog)
 
