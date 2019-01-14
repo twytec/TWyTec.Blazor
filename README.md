@@ -1,32 +1,9 @@
 # TWyTec.Blazor
 
-## [Accordion](https://github.com/twytec/TWyTec.Blazor/tree/master/Accordion)
+Experimental components for Blazor
 
-@using TWyTec.Blazor
+#### Components
 
-@addTagHelper *, TWyTec.Blazor.Accordion
+[Accordion](https://github.com/twytec/TWyTec.Blazor/wiki/Accordion)
 
-```html
-<Accordion>
-  <AccordionItem Header="Accordion 1">
-    Text
-  </AccordionItem>
-</Accordion>
-```
-
-## [ContentDialog](https://github.com/twytec/TWyTec.Blazor/tree/master/ContentDialog)
-
-@using TWyTec.Blazor
-
-@addTagHelper *, TWyTec.Blazor.ContentDialog
-
-```html
-<ContentDialog>
-    <div style="text-align: center;">
-        <p>Hello World</p>
-        <button onclick="@CloseContentDialog">
-            Close
-        </button>
-    </div>
-</ContentDialog>
-```
+[ContentDialog](https://github.com/twytec/TWyTec.Blazor/wiki/ContentDialog)
